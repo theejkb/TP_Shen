@@ -50,6 +50,10 @@ public class Pokemon {
         this.level = level;
     }
     
+    public void setImage(){
+        this.img= "";
+    }
+    
    
     
     
