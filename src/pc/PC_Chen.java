@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class PC_Chen {
 
     private Dresseur utilisateur;
-    private static String URL = "jdbc:mysql://127.0.0.1/pokemon?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    private static String URL = "jdbc:mysql://127.0.0.1/tpchen?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     private static String LOGIN = "root";
     private static String PASSWORD = "";
     private ArrayList<Pokemon> Pokemon;
@@ -68,6 +68,7 @@ public class PC_Chen {
         }
         return rep;
     }
+// renvoie la liste des pokémons  de la poche du dresseur connecté
 
     public ArrayList<Pokemon> getPokemonDetenu() throws SQLException {
         ArrayList<Pokemon> Pok = new ArrayList<>();
@@ -83,11 +84,11 @@ public class PC_Chen {
             int levelpok = rs.getInt("lvl_pok");
             int idpok = rs.getInt("id_pok");
             Pokemon p = new Pokemon(idpok, nompok, levelpok);
-            Pok.add(p);
+            Pok.add(p);            
         }
         return Pok;
     }
-
+// renvoie la liste des pokémons de la boite correspondante
     public ArrayList<Pokemon> getPokemonBoite(int nb) throws SQLException {
         ArrayList<Pokemon> PokBoite = new ArrayList<>();
         this.connecteDresseur(this.utilisateur.getNom_dress());
@@ -96,8 +97,8 @@ public class PC_Chen {
         String query = "SELECT sp.id_pok, nom_pok, sp.lvl_pok "
                 + "FROM pokemon p, stockpokemon sp "
                 + "WHERE p.id_pok = sp.id_pok "
-                + "AND sp.num_boite like " + nb + " "
-                + "AND sp.id_dress like " + id + "";
+                + "AND num_boite like " + nb + " "
+                + "AND id_dress like " + id + ""; 
         ResultSet rs = stmt.executeQuery(query);
         while (rs.next()) {
             String nompok = rs.getString("nom_pok");
@@ -108,10 +109,13 @@ public class PC_Chen {
         }
         return PokBoite;
     }
-
+// Stock le pokémon dans la boite et l'enleve de la poche 
     public boolean stockerPokemon(Pokemon p, int boite) throws SQLException {
         this.connecteDresseur(this.utilisateur.getNom_dress());
         this.stmt = this.connection.createStatement();
+         String query2 = "DELETE FROM detientpokemon "
+                + "WHERE id_dress = " + this.utilisateur.getId_dress() + " AND id_pok = " + p.getId_pok();
+        stmt.executeUpdate(query2);
         String query = "INSERT INTO stockpokemon"
                 + " values (" + this.utilisateur.getId_dress() + "," + p.getId_pok() + "," + p.getLevel() + "," + boite + ")";
         stmt.executeUpdate(query);
@@ -131,8 +135,10 @@ public class PC_Chen {
 
         return false;
     }
+    
+   
 
-    public boolean retierPokemon(Pokemon p, int boite) throws SQLException {
+    public boolean retirerPokemon(Pokemon p) throws SQLException {       
         this.connecteDresseur(this.utilisateur.getNom_dress());
         this.stmt = this.connection.createStatement();
         String query = "INSERT INTO detientpokemon"
