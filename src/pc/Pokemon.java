@@ -14,15 +14,18 @@ public class Pokemon {
     private int id_pok;
     private int level;
     private static int CPT = 0;
+    private String annonce =" " + this.nom_pok + ", " + this.nom_pok ;
     
     public Pokemon(String nom, int level){        
         this.nom_pok = nom;      
         this.level = level;
+        this.annonce = annonce;
     }
     public Pokemon(int idpok, String nom, int level){  
         this.id_pok = idpok;
         this.nom_pok = nom;      
         this.level = level;
+        this.annonce = annonce;
     }
     
 
@@ -49,10 +52,16 @@ public class Pokemon {
     public void setLevel(int level) {
         this.level = level;
     }
-    
-    public void setImage(){
-        this.img= "";
+
+    public String getAnnonce() {
+        return annonce;
     }
+
+    public void setAnnonce(String annonce) {
+        this.annonce = annonce;
+    }
+    
+    
     
    
     

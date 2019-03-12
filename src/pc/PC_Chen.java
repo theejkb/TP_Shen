@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class PC_Chen {
 
     private Dresseur utilisateur;
-    private static String URL = "jdbc:mysql://127.0.0.1/pokemon?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    private static String URL = "jdbc:mysql://127.0.0.1/tpchen?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     private static String LOGIN = "root";
     private static String PASSWORD = "";
     private ArrayList<Pokemon> Pokemon;

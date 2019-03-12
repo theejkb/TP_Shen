@@ -39,9 +39,11 @@ public class View_PCCHEN extends javax.swing.JFrame {
         numBoite.setVisible(false);
         texteBoite.setVisible(false);
         transferePoche.setVisible(false);
+        annoncepok.setVisible(false);
     }
 
     PC_Chen chen = new PC_Chen();
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -72,6 +74,7 @@ public class View_PCCHEN extends javax.swing.JFrame {
         transferePoche = new javax.swing.JButton();
         numBoite = new javax.swing.JComboBox<>();
         texteBoite = new javax.swing.JLabel();
+        annoncepok = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
 
@@ -179,6 +182,8 @@ public class View_PCCHEN extends javax.swing.JFrame {
         texteBoite.setFont(new java.awt.Font("Lucida Console", 0, 11)); // NOI18N
         texteBoite.setText("Boite numéro");
 
+        annoncepok.setText("lol");
+
         jMenu1.setText("PC DE CHEN");
         jMenuBar1.add(jMenu1);
 
@@ -233,6 +238,10 @@ public class View_PCCHEN extends javax.swing.JFrame {
                                         .addComponent(listPokemonBoite, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(annoncePokBoite)))))
                         .addGap(50, 50, 50))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(451, 451, 451)
+                .addComponent(annoncepok)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -244,10 +253,13 @@ public class View_PCCHEN extends javax.swing.JFrame {
                     .addComponent(nomDresseur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(messageInfoConnexion, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 10, Short.MAX_VALUE)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 1, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(AnnoncePokSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(annoncepok)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(AnnoncePokSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(annoncePokDetenu, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -255,7 +267,7 @@ public class View_PCCHEN extends javax.swing.JFrame {
                             .addComponent(numBoite, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(annoncePokBoite)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(listePokemon, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(listPokemonBoite)
@@ -301,6 +313,7 @@ public class View_PCCHEN extends javax.swing.JFrame {
                 transfereBoite.setEnabled(false);
                 transferePoche.setEnabled(false);
                 annoncePokBoite.setVisible(true);
+                annoncepok.setVisible(true);
                 //On affiche ses pokémons
                 annoncePokDetenu.setText("Voici tes pokémons " + nom + " :");
                 AffichePok();
@@ -324,11 +337,12 @@ public class View_PCCHEN extends javax.swing.JFrame {
             transferePoche.setEnabled(false);
             lvlPokSelect.setVisible(true);
             nomPokSelect.setVisible(true);
-            AnnoncePokSelect.setVisible(true);
+            AnnoncePokSelect.setVisible(true);              
             emplacementPokSelect.setVisible(true);
             // on crée un pokémon avec cet index pour afficher son nom et lvl
             Pokemon cePok = this.chen.getPokemonDetenu().get(index);
             nomPokSelect.setText(cePok.getNom_pok());
+            annoncepok.setText(cePok.getAnnonce());
             lvlPokSelect.setText("Niveau " + cePok.getLevel());
             emplacementPokSelect.setText("Stockage : " + this.chen.getNumBoite(cePok));
         } catch (SQLException ex) {
@@ -409,6 +423,7 @@ public class View_PCCHEN extends javax.swing.JFrame {
             Pokemon cePok = this.chen.getPokemonBoite(1).get(index);
             nomPokSelect.setText(cePok.getNom_pok());
             lvlPokSelect.setText("Niveau " + cePok.getLevel());
+            annoncepok.setText(cePok.getAnnonce());
             if (this.chen.getNumBoite(cePok) == 0) {
                 emplacementPokSelect.setText("Stockage : poche");
             } else {
@@ -497,6 +512,7 @@ public class View_PCCHEN extends javax.swing.JFrame {
     private javax.swing.JLabel AnnoncePokSelect;
     private javax.swing.JLabel annoncePokBoite;
     private javax.swing.JLabel annoncePokDetenu;
+    private javax.swing.JLabel annoncepok;
     private javax.swing.JLabel emplacementPokSelect;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
