@@ -15,6 +15,7 @@ public class Pokemon {
     private int level;
     private static int CPT = 0;
     private String annonce ="";
+
     
     public Pokemon(String nom, int level){        
         this.nom_pok = nom;      
